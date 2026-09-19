@@ -1,0 +1,52 @@
+# neoforge.mods.toml for Mystical Range.
+# As of Minecraft 26.1 the "modLoader" and "loaderVersion" fields are no longer written here;
+# FML infers them.
+
+license="${mod_license}"
+issueTrackerURL="https://github.com/viribusegovis/mysticalrange/issues"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+logoFile="mysticalrange.png"
+displayURL="https://modrinth.com/mod/mystical-range"
+authors="ViribusEgoVis"
+description='''
+Adds a button to the Mystical Agriculture Harvester and Mystical Automation Fertilizer screens that toggles an outline of the area the machine works on, sized to its current upgrade.
+'''
+
+# 26.1.2.41-beta is the oldest NeoForge that Mystical Agriculture 9.0.0 (its first 26.1.2 release)
+# accepts, so nothing older could run alongside it. Every NeoForge call this mod makes, including
+# AbstractContainerScreen.getLeftPos/getTopPos (a NeoForge addition), already exists there.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[26.1.2.41-beta,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+# We read Mystical Agriculture's upgrade item and Cucumber's menu class. The methods used, the
+# upgrade being in menu slot 0, and the work-area rule are identical from 9.0.0 (MA, Cucumber) and
+# 2.0.0 (Mystical Automation) through the current 9.0.9 / 9.0.6 / 2.0.6. Mystical Automation (the
+# Fertilizer) is not listed: it is recognised only by its block id, so no class of it is ever loaded.
+[[dependencies.${mod_id}]]
+    modId="mysticalagriculture"
+    type="required"
+    versionRange="[9.0.0,)"
+    ordering="AFTER"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="cucumber"
+    type="required"
+    versionRange="[9.0.0,)"
+    ordering="AFTER"
+    side="CLIENT"
